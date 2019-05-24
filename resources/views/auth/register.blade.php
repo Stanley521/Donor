@@ -10,7 +10,6 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -62,12 +61,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
 
                             <div class="col-md-6">
-                                <input required type="radio" name="user_type" value="user"> User<br>
-                                <input type="radio" name="user_type" value="hospital"> Hospital<br>
-                                <input type="radio" name="user_type" value="red cross"> Red Cross
+                                <input type="radio" name="user_type" value="User"  class="@error('user_type') is-invalid @enderror" required> User<br>
+                                <input type="radio" name="user_type" value="Hospital"> Hospital<br>
+                                <input type="radio" name="user_type" value="Red Cross"> Red Cross
+                                @error('')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

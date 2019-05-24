@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\MarkedLocation;
+use Auth;
 
-class HomeController extends Controller
+class DebugController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,9 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $value = session()->all();
-        $locations = MarkedLocation::all();
-        return view('home', ['users'=>$users, 'value'=>$value, 'locations'=>$locations]);
+        echo "<pre>";
+        print_r($_REQUEST);
+        echo "</pre>";
+        $yyyymmdd = $_REQUEST['accessible'];
+        $timestamp = strtotime($yyyymmdd);
+        echo Auth::user()->id;
+        echo $timestamp. '<br>';
+        echo date("Y-m-d H:i:s", $timestamp);
     }
 }
